@@ -85,7 +85,7 @@ const randomWords = ["曾庆雄", "王凤容",
 	"心心相印", "恩爱如初", "幸福美满", "情意绵绵"];
 const wordDotsMap = {};
 randomWords.forEach((word) => {
-	wordDotsMap[word] = MyMath.literalLattice(word, 3, "Gabriola,华文琥珀", "70px");
+	wordDotsMap[word] = MyMath.literalLattice(word, 3, "Gabriola,华文琥珀",  window.innerWidth <= 800 ? "35px" : "70px");
 });
 
 // 自定义背景
@@ -799,7 +799,7 @@ const heartShell = (size = 1) => {
     const color = Math.random() < 0.5 ? COLOR.Red : COLOR.Pink; // 红色和粉色
     return {
         shellSize: size,
-        spreadSize: 250 + size * Math.random() * 100 + 80,
+        spreadSize: 250 + size * Math.random() * 150 + 80,
         starDensity: 0.5,
         starLife: 1500 + size * 200,
         starLifeVariation: 0.5,
@@ -1931,6 +1931,10 @@ function crackleEffect(star) {
  * floral:
  * crackle:
  */
+
+// 定义一个变量来记录上次文字出现的时间，初始化为 0
+let lastWordTime = 0;
+
 class Shell {
 	constructor(options) {
 		Object.assign(this, options);
@@ -2136,7 +2140,7 @@ class Shell {
 			}
 		};
 
-		//点阵星星工厂
+		// 文字的点阵星星工厂
 		const dotStarFactory = (point, color, strobe, strobeColor) => {
 			const standardInitialSpeed = this.spreadSize / 1800;
 
@@ -2151,7 +2155,7 @@ class Shell {
 					Math.random() * 2 * Math.PI,
 					speed,
 					// add minor variation to star life
-					this.starLife + Math.random() * this.starLife * this.starLifeVariation + speed * 1000,
+					this.starLife + Math.random() * this.starLife * this.starLifeVariation + speed * 1000 + 200,
 					this.horsetail ? this.comet && this.comet.speedX : 0,
 					this.horsetail ? this.comet && this.comet.speedY : -standardInitialSpeed,
 					2
@@ -2256,13 +2260,15 @@ class Shell {
             }
         }
 
-		if (!this.disableWordd && store.state.config.wordShell) {
-			if (Math.random() < 0.1) {
-				if (Math.random() < 0.5) {
-					createWordBurst(randomWord(), dotStarFactory, x, y);
-				}
-			}
-		}
+		// 计算当前时间
+		const currentTime = Date.now();
+
+        // 检查是否满足出现文字的条件
+        if (!this.disableWordd && store.state.config.wordShell && Math.random() < 0.4 && (currentTime - lastWordTime > 2500)) {
+            createWordBurst(randomWord(), dotStarFactory, x, y);
+            // 更新上次文字出现的时间
+            lastWordTime = currentTime;
+        }
 
 		if (this.pistil) {
 			const innerShell = new Shell({
