@@ -78,10 +78,14 @@ const mainStage = new Stage("main-canvas");
 const stages = [trailsStage, mainStage];
 
 //随机文字烟花内容
-const randomWords = ["情人节快乐", "永结同心", "情长梦甜", "爱永相依", "朝暮与共", "情深意长", "心心相印", "恩爱如初", "幸福美满", "情意绵绵"];
+const randomWords = ["曾庆雄", "王凤容",
+	"曾庆雄", "王凤容", "曾庆雄", "王凤容", "曾庆雄", "王凤容",
+	"曾庆雄", "王凤容", "曾庆雄", "王凤容","曾庆雄", "王凤容",
+	"永结同心", "爱永相依", "朝暮与共", "情深意长",
+	"心心相印", "恩爱如初", "幸福美满", "情意绵绵"];
 const wordDotsMap = {};
 randomWords.forEach((word) => {
-	wordDotsMap[word] = MyMath.literalLattice(word, 3, "Gabriola,华文琥珀", "85px");
+	wordDotsMap[word] = MyMath.literalLattice(word, 3, "Gabriola,华文琥珀", "70px");
 });
 
 // 自定义背景
