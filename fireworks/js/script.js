@@ -2154,7 +2154,7 @@ class Shell {
 					Math.random() * 2 * Math.PI,
 					speed,
 					// add minor variation to star life
-					this.starLife + Math.random() * this.starLife * this.starLifeVariation + speed * 1000 + 200,
+					this.starLife + Math.random() * this.starLife * this.starLifeVariation + speed * 1000 + 700,
 					this.horsetail ? this.comet && this.comet.speedX : 0,
 					this.horsetail ? this.comet && this.comet.speedY : -standardInitialSpeed,
 					2
