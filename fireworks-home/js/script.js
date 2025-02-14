@@ -2144,6 +2144,7 @@ class Shell {
 		const dotStarFactory = (point, color, strobe, strobeColor) => {
 			const standardInitialSpeed = this.spreadSize / 1800;
 
+			strobe = true; // TODO:总true效果才好
 			if (strobe) {
 				//随机speed 0.05~0.15
 				var speed = Math.random() * 0.1 + 0.05;
